@@ -135,9 +135,283 @@ body {
    Sidebar
 ========================== */
 
-/* ==========================
-   Book
-========================== */
+/*=============================
+        MAIN LAYOUT
+==============================*/
+
+.layout {
+    display: flex;
+    height: calc(100vh - 90px - 110px);
+}
+
+
+/*=============================
+        SIDEBAR
+==============================*/
+
+.sidebar {
+    width: 320px;
+    background: #111827;
+    color: white;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.sidebar-header h3 {
+    font-size: 22px;
+    margin-bottom: 30px;
+}
+
+.chapter-list {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.chapter {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px;
+    border-radius: 16px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.chapter:hover {
+    background: #1f2937;
+}
+
+.chapter.active {
+    background: #6D5EF8;
+}
+
+.chapter-number {
+    width: 42px;
+    height: 42px;
+    background: rgba(255, 255, 255, .15);
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    flex-shrink: 0;
+}
+
+.chapter span {
+    font-size: 15px;
+    line-height: 1.4;
+}
+
+.download-btn {
+    margin-top: 25px;
+    height: 55px;
+    border: none;
+    border-radius: 16px;
+    background: #1f2937;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    transition: .3s;
+}
+
+.download-btn:hover {
+    background: #374151;
+}
+
+/*=============================
+        BOOK CONTENT
+==============================*/
+
+.book-content {
+
+    flex: 1;
+
+    padding: 40px;
+
+    overflow: auto;
+
+    background: #f4f5f7;
+
+}
+
+.book-page {
+
+    max-width: 900px;
+
+    margin: auto;
+
+    background: #fffdf8;
+
+    border-radius: 24px;
+
+    padding: 50px;
+
+    box-shadow: 0 20px 60px rgba(0, 0, 0, .08);
+
+}
+
+.chapter-top {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 20px;
+
+}
+
+.chapter-tag {
+
+    background: #ede9fe;
+
+    color: #6D5EF8;
+
+    padding: 8px 18px;
+
+    border-radius: 50px;
+
+    font-weight: 600;
+
+}
+
+.chapter-number {
+
+    color: #6b7280;
+
+}
+
+.chapter-title {
+
+    font-size: 42px;
+
+    font-family: Poppins, sans-serif;
+
+    margin-bottom: 15px;
+
+}
+
+.chapter-subtitle {
+
+    color: #6b7280;
+
+    margin-bottom: 35px;
+
+    line-height: 1.8;
+
+}
+
+.progress-head {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-bottom: 10px;
+
+}
+
+.reading-bar {
+
+    height: 8px;
+
+    background: #e5e7eb;
+
+    border-radius: 50px;
+
+}
+
+.reading-fill {
+
+    width: 35%;
+
+    height: 100%;
+
+    background: #6D5EF8;
+
+    border-radius: 50px;
+
+}
+
+.chapter-body {
+
+    margin: 40px 0;
+
+}
+
+.chapter-body p {
+
+    line-height: 2;
+
+    margin-bottom: 20px;
+
+    color: #374151;
+
+}
+
+.key-point {
+
+    background: #eef2ff;
+
+    border-left: 5px solid #6D5EF8;
+
+    padding: 25px;
+
+    border-radius: 16px;
+
+    margin-bottom: 35px;
+
+}
+
+.code-box {
+
+    background: #111827;
+
+    color: white;
+
+    border-radius: 16px;
+
+    padding: 25px;
+
+    overflow: auto;
+
+    margin-bottom: 40px;
+
+}
+
+.chapter-navigation {
+
+    display: flex;
+
+    justify-content: space-between;
+
+}
+
+.chapter-navigation button {
+
+    border: none;
+
+    background: #6D5EF8;
+
+    color: white;
+
+    padding: 14px 28px;
+
+    border-radius: 12px;
+
+    cursor: pointer;
+
+    font-size: 15px;
+
+}
 
 /* ==========================
    Audio
