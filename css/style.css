@@ -1,0 +1,148 @@
+/* ==========================
+   Reset
+========================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #f4f5f7;
+    font-family: 'Inter', sans-serif;
+}
+
+/* ==========================
+   Variables
+========================== */
+
+/* ==========================
+   Header
+========================== */
+
+.header {
+    height: 90px;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 35px;
+    border-bottom: 1px solid #e8e8e8;
+}
+
+
+/* Logo */
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo-icon {
+    width: 55px;
+    height: 55px;
+    background: #6D5EF8;
+    border-radius: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 22px;
+}
+
+.logo-text h2 {
+    font-family: 'Poppins';
+    font-size: 24px;
+}
+
+.logo-text span {
+    font-size: 13px;
+    color: #777;
+}
+
+
+/* Search */
+
+.search-box {
+    width: 430px;
+    height: 52px;
+    background: white;
+    border-radius: 50px;
+    border: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    gap: 12px;
+
+}
+
+.search-box input {
+    width: 100%;
+    border: none;
+    outline: none;
+    font-size: 15px;
+    background: transparent;
+}
+
+
+/* Right Side */
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+}
+
+.header-actions button {
+    width: 46px;
+    height: 46px;
+    border: none;
+    background: #f3f4f6;
+    border-radius: 14px;
+    cursor: pointer;
+    font-size: 18px;
+
+}
+
+.progress {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.progress span {
+    font-weight: 600;
+}
+
+.progress-bar {
+    width: 120px;
+    height: 8px;
+    background: #ddd;
+    border-radius: 30px;
+}
+
+.progress-fill {
+    width: 35%;
+    height: 100%;
+    background: #6D5EF8;
+    border-radius: 30px;
+}
+
+/* ==========================
+   Sidebar
+========================== */
+
+/* ==========================
+   Book
+========================== */
+
+/* ==========================
+   Audio
+========================== */
+
+/* ==========================
+   Responsive
+========================== */
