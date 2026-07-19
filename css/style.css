@@ -9,7 +9,7 @@
 }
 
 body {
-    background: #f4f5f7;
+    background: var(--bg);
     font-family: 'Inter', sans-serif;
 }
 
@@ -17,13 +17,54 @@ body {
    Variables
 ========================== */
 
+:root {
+
+    /* Brand */
+
+    --primary: #6D5EF8;
+    --primary-light: #ECE9FF;
+
+    /* Background */
+
+    --bg: #F4F5F7;
+    --surface: #FFFFFF;
+    --book: #FFFDF8;
+
+    /* Sidebar */
+
+    --sidebar: #111827;
+    --sidebar-hover: #1F2937;
+
+    /* Text */
+
+    --text: #1F2937;
+    --text-light: #6B7280;
+
+    /* Border */
+
+    --border: #E5E7EB;
+
+    /* Radius */
+
+    --radius-sm: 10px;
+    --radius-md: 16px;
+    --radius-lg: 24px;
+
+    /* Shadow */
+
+    --shadow:
+
+        0 10px 40px rgba(0, 0, 0, .08);
+
+}
+
 /* ==========================
    Header
 ========================== */
 
 .header {
     height: 90px;
-    background: #ffffff;
+    background: var(--surface);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -43,7 +84,7 @@ body {
 .logo-icon {
     width: 55px;
     height: 55px;
-    background: #6D5EF8;
+    background: var(--primary);
     border-radius: 16px;
     display: flex;
     justify-content: center;
@@ -127,7 +168,7 @@ body {
 .progress-fill {
     width: 35%;
     height: 100%;
-    background: #6D5EF8;
+    background: var(--primary);
     border-radius: 30px;
 }
 
@@ -181,11 +222,11 @@ body {
 }
 
 .chapter:hover {
-    background: #1f2937;
+    background: var(--text);
 }
 
 .chapter.active {
-    background: #6D5EF8;
+    background: var(--primary);
 }
 
 .chapter-number {
@@ -210,7 +251,7 @@ body {
     height: 55px;
     border: none;
     border-radius: 16px;
-    background: #1f2937;
+    background: var(--text);
     color: white;
     font-size: 15px;
     cursor: pointer;
@@ -237,7 +278,7 @@ body {
 
     overflow: auto;
 
-    background: #f4f5f7;
+    background: var(--bg);
 
 }
 
@@ -247,7 +288,7 @@ body {
 
     margin: auto;
 
-    background: #fffdf8;
+    background: var(--book);
 
     border-radius: 24px;
 
@@ -273,7 +314,7 @@ body {
 
     background: #ede9fe;
 
-    color: #6D5EF8;
+    color: var(--primary);
 
     padding: 8px 18px;
 
@@ -285,7 +326,7 @@ body {
 
 .chapter-number {
 
-    color: #6b7280;
+    color: var(--text-light);
 
 }
 
@@ -301,7 +342,7 @@ body {
 
 .chapter-subtitle {
 
-    color: #6b7280;
+    color: var(--text-light);
 
     margin-bottom: 35px;
 
@@ -323,7 +364,7 @@ body {
 
     height: 8px;
 
-    background: #e5e7eb;
+    background: var(--border);
 
     border-radius: 50px;
 
@@ -335,7 +376,7 @@ body {
 
     height: 100%;
 
-    background: #6D5EF8;
+    background: var(--primary);
 
     border-radius: 50px;
 
@@ -361,7 +402,7 @@ body {
 
     background: #eef2ff;
 
-    border-left: 5px solid #6D5EF8;
+    border-left: 5px solid var(--primary);
 
     padding: 25px;
 
@@ -399,7 +440,7 @@ body {
 
     border: none;
 
-    background: #6D5EF8;
+    background: var(--primary);
 
     color: white;
 
@@ -413,9 +454,180 @@ body {
 
 }
 
-/* ==========================
-   Audio
-========================== */
+/*=============================
+        AUDIO PLAYER
+==============================*/
+
+.audio-player {
+    height: 90px;
+    background: var(--sidebar);
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    color: #fff;
+
+}
+
+/* Left */
+
+.player-info {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+}
+
+.player-icon {
+
+    width: 50px;
+
+    height: 50px;
+
+    border-radius: 14px;
+
+    background: var(--primary);
+
+    color: white;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    font-size: 20px;
+
+}
+
+.player-info h4 {
+
+    margin-bottom: 4px;
+
+}
+
+.player-info span {
+
+    color: var(--text-light);
+
+    font-size: 14px;
+
+}
+
+/* Center */
+
+.player-controls {
+
+    display: flex;
+
+    gap: 15px;
+
+}
+
+.player-controls button {
+
+    width: 48px;
+
+    height: 48px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: #f3f4f6;
+
+    cursor: pointer;
+
+    font-size: 18px;
+
+    transition: .3s;
+
+}
+
+.player-controls button:hover {
+
+    background: var(--border);
+
+}
+
+.play-btn {
+
+    background: var(--primary) !important;
+
+    color: white;
+
+}
+
+/* Progress */
+
+.player-progress {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    width: 350px;
+
+}
+
+.audio-bar {
+
+    flex: 1;
+
+    height: 8px;
+
+    background: var(--border);
+
+    border-radius: 50px;
+
+    overflow: hidden;
+
+}
+
+.audio-fill {
+
+    width: 30%;
+
+    height: 100%;
+
+    background: var(--primary);
+
+}
+
+/* Right */
+
+.player-options {
+
+    display: flex;
+
+    gap: 12px;
+
+}
+
+.player-options button {
+
+    width: 46px;
+
+    height: 46px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background: #f3f4f6;
+
+    cursor: pointer;
+
+}
 
 /* ==========================
    Responsive
