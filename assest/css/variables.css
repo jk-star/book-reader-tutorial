@@ -1,0 +1,44 @@
+/* ==========================
+   Variables
+========================== */
+
+:root {
+
+    /* Brand */
+
+    --primary: #6D5EF8;
+    --primary-light: #ECE9FF;
+
+    /* Background */
+
+    --bg: #F4F5F7;
+    --surface: #FFFFFF;
+    --book: #FFFDF8;
+
+    /* Sidebar */
+
+    --sidebar: #111827;
+    --sidebar-hover: #1F2937;
+
+    /* Text */
+
+    --text: #1F2937;
+    --text-light: #6B7280;
+
+    /* Border */
+
+    --border: #E5E7EB;
+
+    /* Radius */
+
+    --radius-sm: 10px;
+    --radius-md: 16px;
+    --radius-lg: 24px;
+
+    /* Shadow */
+
+    --shadow:
+
+        0 10px 40px rgba(0, 0, 0, .08);
+
+}
