@@ -4,23 +4,26 @@
         "slug": "finish-what-you-start",
         "title": "Finish What You Start",
         "author": "Peter Hollins",
-        "chapters": 40,
-        "cover": "assets/images/finish-what-you-start.jpg"
-    },
-    {
-        "id": 2,
-        "slug": "css",
-        "title": "CSS Complete Tutorial",
-        "author": "Jyoti Singh",
-        "chapters": 35,
-        "cover": "assets/images/css.png"
-    },
-    {
-        "id": 3,
-        "slug": "javascript",
-        "title": "JavaScript Complete Tutorial",
-        "author": "Jyoti Singh",
-        "chapters": 60,
-        "cover": "assets/images/javascript.png"
+        "cover": "assets/images/finish-what-you-start.jpg",
+        "chapters": [
+            {
+                "id": 1,
+                "title": "Introduction",
+                "file": "chapters/chapter-1.html",
+                "audio": "audio/chapter-1.mp3"
+            },
+            {
+                "id": 2,
+                "title": "Know Yourself",
+                "file": "chapters/chapter-2.html",
+                "audio": "audio/chapter-2.mp3"
+            },
+            {
+                "id": 3,
+                "title": "Build Momentum",
+                "file": "chapters/chapter-3.html",
+                "audio": "audio/chapter-3.mp3"
+            }
+        ]
     }
 ]

@@ -14,11 +14,7 @@ fetch("assets/data/books.json")
                 <div class="book-cover">
                     <img src="${book.cover}">
                 </div>
-
                 <h2>${book.title}</h2>
-
-                <p> ${book.chapters} Chapters </p>
-
                 <button> Continue Reading </button>
 
             </article>
