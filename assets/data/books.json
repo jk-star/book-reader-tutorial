@@ -5,8 +5,7 @@
         "title": "Finish What You Start",
         "author": "Peter Hollins",
         "chapters": 40,
-        "cover": "assets/images/finish-what-you-start.jpg",
-        "themeColor": "#E34F26"
+        "cover": "assets/images/finish-what-you-start.jpg"
     },
     {
         "id": 2,
@@ -14,8 +13,7 @@
         "title": "CSS Complete Tutorial",
         "author": "Jyoti Singh",
         "chapters": 35,
-        "cover": "assets/images/css.png",
-        "themeColor": "#1572B6"
+        "cover": "assets/images/css.png"
     },
     {
         "id": 3,
@@ -23,7 +21,6 @@
         "title": "JavaScript Complete Tutorial",
         "author": "Jyoti Singh",
         "chapters": 60,
-        "cover": "assets/images/javascript.png",
-        "themeColor": "#F7DF1E"
+        "cover": "assets/images/javascript.png"
     }
 ]
