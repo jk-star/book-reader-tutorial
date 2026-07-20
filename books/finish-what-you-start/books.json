@@ -5,6 +5,7 @@
         "title": "Finish What You Start",
         "author": "Peter Hollins",
         "cover": "assets/images/finish-what-you-start.jpg",
+        "total_chapters": 40,
         "chapters": [
             {
                 "id": 1,

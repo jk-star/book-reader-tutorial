@@ -1,10 +1,10 @@
 const bookGrid = document.getElementById("bookGrid");
 
-fetch("assets/data/books.json")
+fetch("books/finish-what-you-start/books.json")
     .then(res => res.json())
 
     .then(books => {
-        
+
         books.forEach(book => {
 
             bookGrid.innerHTML += `
@@ -14,8 +14,14 @@ fetch("assets/data/books.json")
                 <div class="book-cover">
                     <img src="${book.cover}">
                 </div>
+
                 <h2>${book.title}</h2>
-                <button> Continue Reading </button>
+
+                <p> ${book.total_chapters} Chapters </p>
+
+               <button onclick="openBook('${book.slug}')">
+                    Continue Reading
+                </button>
 
             </article>
 
@@ -24,3 +30,7 @@ fetch("assets/data/books.json")
         });
 
     });
+
+function openBook(slug) {
+    window.location.href = `reader.html?book=${slug}`;
+}
