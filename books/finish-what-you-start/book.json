@@ -1,0 +1,36 @@
+{
+    "id": 1,
+    "slug": "finish-what-you-start",
+    "title": "Finish What You Start",
+    "author": "Peter Hollins",
+    "description": "A practical guide to building discipline, consistency, and finishing what you start.",
+    "cover": "images/cover.jpg",
+    "language": "English",
+    "category": "Self Improvement",
+    "version": "1.0",
+    "totalChapters": 3,
+
+    "chapters": [
+        {
+            "id": 1,
+            "title": "Introduction",
+            "file": "chapters/chapter-1.md",
+            "audio": "audio/chapter-1.mp3",
+            "duration": "08:35"
+        },
+        {
+            "id": 2,
+            "title": "Know Yourself",
+            "file": "chapters/chapter-2.md",
+            "audio": "audio/chapter-2.mp3",
+            "duration": "12:10"
+        },
+        {
+            "id": 3,
+            "title": "Build Momentum",
+            "file": "chapters/chapter-3.md",
+            "audio": "audio/chapter-3.mp3",
+            "duration": "09:42"
+        }
+    ]
+}

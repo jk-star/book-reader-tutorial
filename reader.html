@@ -11,16 +11,57 @@
 
     <link rel="stylesheet" href="assets/css/style.css">
 
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
 </head>
 
 <body>
 
-    <div id="readerApp">
+    <div class="reader-container reader-layout">
 
-        <h1>Loading Book...</h1>
+        <!-- Sidebar -->
+        <aside id="sidebar" class="sidebar">
+
+        </aside>
+
+        <!-- Content -->
+        <main class="reader-content">
+
+            <div class="book-header">
+
+                <h1 id="bookTitle">Loading Book...</h1>
+
+                <p id="bookAuthor"></p>
+
+            </div>
+
+            <article id="content" class="chapter-content">
+
+                Loading Chapter...
+
+            </article>
+
+            <div class="chapter-navigation">
+
+                <button id="prevChapter">
+
+                    ← Previous
+
+                </button>
+
+                <button id="nextChapter">
+
+                    Next →
+
+                </button>
+
+            </div>
+
+        </main>
 
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="assets/js/reader.js"></script>
 
 </body>
