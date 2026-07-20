@@ -19,6 +19,10 @@ const slug = params.get("book");
 let currentBook = null;
 let currentChapter = 0;
 
+const bookCover = document.getElementById("bookCover");
+const chapterCount = document.getElementById("chapterCount");
+const progressBar = document.getElementById("progressBar");
+
 // =========================================
 // INIT
 // =========================================
@@ -27,6 +31,8 @@ document.addEventListener("DOMContentLoaded", init);
 
 async function init() {
     await loadBook();
+    console.log(`book cover ${bookCover}`);
+    bookCover.src = `books/${slug}/${currentBook.cover}`;
 
     prevBtn.addEventListener("click", previousChapter);
     nextBtn.addEventListener("click", nextChapter);
@@ -119,6 +125,14 @@ async function openChapter(index) {
         const markdown = await response.text();
 
         content.innerHTML = marked.parse(markdown);
+
+        chapterCount.textContent =
+            `Chapter ${currentChapter + 1} / ${currentBook.chapters.length}`;
+
+        const progress =
+            ((currentChapter + 1) / currentBook.chapters.length) * 100;
+
+        progressBar.style.width = progress + "%";
 
         updateActiveChapter();
 
