@@ -105,14 +105,6 @@
     border-radius: 30px;
 }
 
-.progress-fill {
-    width: 35%;
-    height: 100%;
-    background: var(--primary);
-    border-radius: 30px;
-}
-
-
 /*=============================
         SIDEBAR
 ==============================*/
@@ -257,15 +249,14 @@
 }
 
 .progress-fill{
-
     width:0%;
-
     height:100%;
-
-    background:#6D5EF8;
-
-    transition:.3s;
-
+    background:linear-gradient(
+        90deg,
+        #6D5EF8,
+        #8B7BFF
+    );
+    transition:width .4s ease;
 }
 
 .reader-tools{

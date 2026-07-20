@@ -23,6 +23,13 @@ const bookCover = document.getElementById("bookCover");
 const chapterCount = document.getElementById("chapterCount");
 const progressBar = document.getElementById("progressBar");
 
+const chapterContent = document.getElementById("content");
+
+const darkBtn = document.querySelector(
+    '.reader-tools button[title="Dark Mode"]'
+);
+
+const bookmarkBtn = document.getElementById("bookmarkBtn");
 // =========================================
 // INIT
 // =========================================
@@ -36,6 +43,15 @@ async function init() {
 
     prevBtn.addEventListener("click", previousChapter);
     nextBtn.addEventListener("click", nextChapter);
+
+    loadTheme();
+
+    darkBtn.addEventListener("click", toggleTheme);
+
+    bookmarkBtn.addEventListener(
+        "click",
+        toggleBookmark
+    );
 }
 
 // =========================================
@@ -59,7 +75,18 @@ async function loadBook() {
 
         createSidebar();
 
-        openChapter(0);
+        const savedChapter =
+            localStorage.getItem(`book-${slug}`);
+
+        if (savedChapter !== null) {
+
+            openChapter(Number(savedChapter));
+
+        } else {
+
+            openChapter(0);
+
+        }
 
     } catch (error) {
 
@@ -125,6 +152,18 @@ async function openChapter(index) {
         const markdown = await response.text();
 
         content.innerHTML = marked.parse(markdown);
+
+        // Save Last Read Chapter
+        localStorage.setItem(
+            `book-${slug}`,
+            currentChapter
+        );
+
+        // Update UI
+        updateActiveChapter();
+        updateNavigation();
+        updateProgress();
+        updateBookmarkIcon();
 
         chapterCount.textContent =
             `Chapter ${currentChapter + 1} / ${currentBook.chapters.length}`;
@@ -204,5 +243,134 @@ function nextChapter() {
         openChapter(currentChapter + 1);
 
     }
+
+}
+
+chapterContent.addEventListener("scroll", () => {
+
+    const scrollTop = chapterContent.scrollTop;
+
+    const scrollHeight =
+        chapterContent.scrollHeight -
+        chapterContent.clientHeight;
+
+    if (scrollHeight <= 0) return;
+
+    const percentage =
+        (scrollTop / scrollHeight) * 100;
+
+    console.log(
+        "Reading Progress :",
+        Math.round(percentage) + "%"
+    );
+
+});
+
+// =========================================
+// Progress
+// =========================================
+
+function updateProgress() {
+
+    const percentage =
+        ((currentChapter + 1) / currentBook.chapters.length) * 100;
+
+    progressBar.style.width = percentage + "%";
+
+    chapterCount.textContent =
+        `Chapter ${currentChapter + 1} / ${currentBook.chapters.length}`;
+
+}
+
+// =========================================
+// Theme
+// =========================================
+
+function loadTheme() {
+
+    const theme = localStorage.getItem("theme");
+    if (theme === "dark") {
+        document.body.classList.add("dark");
+    }
+
+}
+
+function toggleTheme() {
+
+    document.body.classList.toggle("dark");
+    if (document.body.classList.contains("dark")) {
+        localStorage.setItem("theme", "dark");
+    } else {
+        localStorage.setItem("theme", "light");
+    }
+
+}
+
+function toggleTheme() {
+
+    document.body.classList.toggle("dark");
+
+    const isDark = document.body.classList.contains("dark");
+
+    localStorage.setItem(
+        "theme",
+        isDark ? "dark" : "light"
+    );
+
+    darkBtn.textContent = isDark ? "☀️" : "🌙";
+
+}
+
+// =========================================
+// Bookmark
+// =========================================
+
+function getBookmarks() {
+
+    return JSON.parse(
+        localStorage.getItem(`bookmark-${slug}`) || "[]"
+    );
+
+}
+
+function saveBookmarks(bookmarks) {
+
+    localStorage.setItem(
+        `bookmark-${slug}`,
+        JSON.stringify(bookmarks)
+    );
+
+}
+
+function toggleBookmark() {
+
+    let bookmarks = getBookmarks();
+
+    if (bookmarks.includes(currentChapter)) {
+
+        bookmarks = bookmarks.filter(
+            chapter => chapter !== currentChapter
+        );
+
+    } else {
+
+        bookmarks.push(currentChapter);
+
+    }
+
+    saveBookmarks(bookmarks);
+
+    updateBookmarkIcon();
+
+}
+
+function updateBookmarkIcon() {
+
+    const bookmarks = getBookmarks();
+
+    bookmarkBtn.textContent =
+        bookmarks.includes(currentChapter)
+            ? "⭐"
+            : "🔖";
 
 }
