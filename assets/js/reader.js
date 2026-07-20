@@ -1,29 +1,40 @@
-// =======================================
-// Book Reader Engine
-// =======================================
+// =========================================
+// BOOK READER ENGINE
+// =========================================
 
-// ---------- DOM Elements ----------
+// DOM
 const sidebar = document.getElementById("sidebar");
 const content = document.getElementById("content");
 const bookTitle = document.getElementById("bookTitle");
 const bookAuthor = document.getElementById("bookAuthor");
 
-// ---------- URL ----------
+const prevBtn = document.getElementById("prevChapter");
+const nextBtn = document.getElementById("nextChapter");
+
+// URL
 const params = new URLSearchParams(window.location.search);
 const slug = params.get("book");
 
-// ---------- Global Variables ----------
+// Global
 let currentBook = null;
 let currentChapter = 0;
 
-// ---------- Start ----------
-document.addEventListener("DOMContentLoaded", () => {
-    loadBook();
-});
+// =========================================
+// INIT
+// =========================================
 
-// =======================================
-// Load Book
-// =======================================
+document.addEventListener("DOMContentLoaded", init);
+
+async function init() {
+    await loadBook();
+
+    prevBtn.addEventListener("click", previousChapter);
+    nextBtn.addEventListener("click", nextChapter);
+}
+
+// =========================================
+// LOAD BOOK
+// =========================================
 
 async function loadBook() {
 
@@ -37,14 +48,11 @@ async function loadBook() {
 
         currentBook = await response.json();
 
-        // Book Info
         bookTitle.textContent = currentBook.title;
         bookAuthor.textContent = currentBook.author;
 
-        // Sidebar
         createSidebar();
 
-        // First Chapter
         openChapter(0);
 
     } catch (error) {
@@ -60,9 +68,9 @@ async function loadBook() {
 
 }
 
-// =======================================
-// Sidebar
-// =======================================
+// =========================================
+// SIDEBAR
+// =========================================
 
 function createSidebar() {
 
@@ -74,7 +82,7 @@ function createSidebar() {
 
         button.className = "chapter-btn";
 
-        button.textContent = chapter.title;
+        button.textContent = `${index + 1}. ${chapter.title}`;
 
         button.addEventListener("click", () => {
 
@@ -88,9 +96,9 @@ function createSidebar() {
 
 }
 
-// =======================================
-// Open Chapter
-// =======================================
+// =========================================
+// OPEN CHAPTER
+// =========================================
 
 async function openChapter(index) {
 
@@ -104,7 +112,7 @@ async function openChapter(index) {
 
         if (!response.ok) {
 
-            throw new Error("Chapter not found");
+            throw new Error("Chapter file not found");
 
         }
 
@@ -113,6 +121,8 @@ async function openChapter(index) {
         content.innerHTML = marked.parse(markdown);
 
         updateActiveChapter();
+
+        updateNavigation();
 
     }
 
@@ -129,26 +139,56 @@ async function openChapter(index) {
 
 }
 
-// =======================================
-// Active Chapter
-// =======================================
+// =========================================
+// ACTIVE BUTTON
+// =========================================
 
 function updateActiveChapter() {
 
     const buttons = document.querySelectorAll(".chapter-btn");
 
-    buttons.forEach((btn, index) => {
+    buttons.forEach(btn => {
 
-        if (index === currentChapter) {
-
-            btn.classList.add("active");
-
-        } else {
-
-            btn.classList.remove("active");
-
-        }
+        btn.classList.remove("active");
 
     });
+
+    if (buttons[currentChapter]) {
+
+        buttons[currentChapter].classList.add("active");
+
+    }
+
+}
+
+// =========================================
+// NAVIGATION
+// =========================================
+
+function updateNavigation() {
+
+    prevBtn.disabled = currentChapter === 0;
+
+    nextBtn.disabled = currentChapter === currentBook.chapters.length - 1;
+
+}
+
+function previousChapter() {
+
+    if (currentChapter > 0) {
+
+        openChapter(currentChapter - 1);
+
+    }
+
+}
+
+function nextChapter() {
+
+    if (currentChapter < currentBook.chapters.length - 1) {
+
+        openChapter(currentChapter + 1);
+
+    }
 
 }

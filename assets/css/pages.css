@@ -426,3 +426,13 @@
 .chapter-btn:hover{
     background:#6D5EF8;
 }
+
+.chapter-btn.active{
+    background:var(--primary);
+    color:white;
+}
+
+.chapter-navigation button:disabled{
+    opacity:.4;
+    cursor:not-allowed;
+}
