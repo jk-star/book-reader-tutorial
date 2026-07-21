@@ -35,6 +35,9 @@ const chapterSearch = document.getElementById("chapterSearch");
 let readingSeconds = 0;
 let timer = null;
 
+const chapterNotes = document.getElementById("chapterNotes");
+const saveNotes = document.getElementById("saveNotes");
+
 // =========================================
 // INIT
 // =========================================
@@ -185,6 +188,12 @@ async function openChapter(index) {
         updateBookmarkIcon();
         updateAnalytics();
 
+        // Load Saved Notes
+        chapterNotes.value =
+            localStorage.getItem(
+                `notes-${slug}-${currentChapter}`
+            ) || "";
+
     }
 
     catch (error) {
@@ -214,15 +223,11 @@ function updateActiveChapter() {
     const buttons = document.querySelectorAll(".chapter-btn");
 
     buttons.forEach(btn => {
-
         btn.classList.remove("active");
-
     });
 
     if (buttons[currentChapter]) {
-
         buttons[currentChapter].classList.add("active");
-
     }
 
 }
@@ -232,31 +237,20 @@ function updateActiveChapter() {
 // =========================================
 
 function updateNavigation() {
-
     prevBtn.disabled = currentChapter === 0;
-
     nextBtn.disabled = currentChapter === currentBook.chapters.length - 1;
-
 }
 
 function previousChapter() {
-
     if (currentChapter > 0) {
-
         openChapter(currentChapter - 1);
-
     }
-
 }
 
 function nextChapter() {
-
     if (currentChapter < currentBook.chapters.length - 1) {
-
         openChapter(currentChapter + 1);
-
     }
-
 }
 
 chapterContent.addEventListener("scroll", () => {
@@ -339,20 +333,16 @@ function toggleTheme() {
 // =========================================
 
 function getBookmarks() {
-
     return JSON.parse(
         localStorage.getItem(`bookmark-${slug}`) || "[]"
     );
-
 }
 
 function saveBookmarks(bookmarks) {
-
     localStorage.setItem(
         `bookmark-${slug}`,
         JSON.stringify(bookmarks)
     );
-
 }
 
 function toggleBookmark() {
@@ -360,21 +350,15 @@ function toggleBookmark() {
     let bookmarks = getBookmarks();
 
     if (bookmarks.includes(currentChapter)) {
-
         bookmarks = bookmarks.filter(
             chapter => chapter !== currentChapter
         );
-
     } else {
-
         bookmarks.push(currentChapter);
-
     }
 
     saveBookmarks(bookmarks);
-
     updateBookmarkIcon();
-    createSidebar();
 
 }
 
@@ -389,28 +373,13 @@ function updateBookmarkIcon() {
 
 }
 
-const bookmarks = getBookmarks();
-
-if (bookmarks.includes(index)) {
-
-    button.innerHTML = `⭐ ${index + 1}. ${chapter.title}`;
-
-} else {
-
-    button.textContent = `${index + 1}. ${chapter.title}`;
-
-}
-
 function updateAnalytics() {
 
-    const readingTime =
-        document.getElementById("readingTime");
+    const readingTime = document.getElementById("readingTime");
 
-    const wordCount =
-        document.getElementById("wordCount");
+    const wordCount = document.getElementById("wordCount");
 
-    const readingProgress =
-        document.getElementById("readingProgress");
+    const readingProgress = document.getElementById("readingProgress");
 
     if (!readingTime || !wordCount || !readingProgress) {
         return;
@@ -430,30 +399,30 @@ function updateAnalytics() {
     readingProgress.textContent =
         Math.round(
             ((currentChapter + 1) /
-            currentBook.chapters.length) * 100
+                currentBook.chapters.length) * 100
         ) + "%";
 
 }
 
 
-chapterSearch.addEventListener("input", function(){
+chapterSearch.addEventListener("input", function () {
 
     const keyword = this.value.trim().toLowerCase();
 
     const paragraphs =
         content.querySelectorAll("p,li");
 
-    paragraphs.forEach(item=>{
+    paragraphs.forEach(item => {
 
-        item.style.background="";
+        item.style.background = "";
 
-        if(keyword==="") return;
+        if (keyword === "") return;
 
-        if(item.textContent
+        if (item.textContent
             .toLowerCase()
-            .includes(keyword)){
+            .includes(keyword)) {
 
-            item.style.background="#FFF3BF";
+            item.style.background = "#FFF3BF";
 
         }
 
@@ -461,11 +430,11 @@ chapterSearch.addEventListener("input", function(){
 
 });
 
-function startReadingTimer(){
+function startReadingTimer() {
 
-    if(timer) clearInterval(timer);
+    if (timer) clearInterval(timer);
 
-    timer = setInterval(()=>{
+    timer = setInterval(() => {
 
         readingSeconds++;
 
@@ -476,7 +445,20 @@ function startReadingTimer(){
 
         updateAnalytics();
 
-    },1000);
+    }, 1000);
 
 }
 
+
+saveNotes.addEventListener("click", () => {
+
+    localStorage.setItem(
+        `notes-${slug}-${currentChapter}`,
+        chapterNotes.value
+    );
+
+    alert("✅ Notes Saved");
+
+});
+
+chapterNotes.value = localStorage.getItem(`notes-${slug}-${currentChapter}`) || "";
