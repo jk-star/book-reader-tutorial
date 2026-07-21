@@ -1,0 +1,23 @@
+[
+    {
+        "slug": "finish-what-you-start",
+        "title": "Finish What You Start",
+        "author": "Peter Hollins",
+        "cover": "books/finish-what-you-start/images/cover.jpg",
+        "total_chapters": 12
+    },
+    {
+        "slug": "atomic-habits",
+        "title": "Atomic Habits",
+        "author": "James Clear",
+        "cover": "books/atomic-habits/images/cover.jpg",
+        "total_chapters": 20
+    },
+    {
+        "slug": "deep-work",
+        "title": "Deep Work",
+        "author": "Cal Newport",
+        "cover": "books/deep-work/images/cover.jpg",
+        "total_chapters": 15
+    }
+]
