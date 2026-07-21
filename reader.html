@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Book Reader</title>
+
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+</head>
+
+<body>
+
+    <div class="reader-container reader-layout">
+
+        <!-- Sidebar -->
+        <aside id="sidebar" class="sidebar">
+
+        </aside>
+
+        <!-- Content -->
+        <main class="reader-content">
+
+            <div class="reader-header">
+
+                <div class="book-info">
+
+                    <img id="bookCover" src="" alt="Book Cover" class="book-cover-small">
+
+                    <div>
+
+                        <h1 id="bookTitle">Loading...</h1>
+
+                        <p id="bookAuthor"></p>
+
+                        <div class="chapter-progress">
+
+                            <span id="chapterCount">
+
+                                Chapter 1 / 1
+
+                            </span>
+
+                            <div class="progress">
+
+                                <div id="progressBar" class="progress-fill">
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="reader-tools">
+
+                    <button title="Font Size">
+                        Aa
+                    </button>
+
+                    <button title="Dark Mode">
+                        🌙
+                    </button>
+
+                    <button id="bookmarkBtn" title="Bookmark">
+                        🔖
+                    </button>
+
+                </div>
+
+            </div>
+
+            <article id="content" class="chapter-content">
+
+                Loading Chapter...
+
+            </article>
+
+            <div class="chapter-navigation">
+
+                <button id="prevChapter">
+
+                    ← Previous
+
+                </button>
+
+                <button id="nextChapter">
+
+                    Next →
+
+                </button>
+
+            </div>
+
+        </main>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="assets/js/reader.js"></script>
+
+</body>
+
+</html>

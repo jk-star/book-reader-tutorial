@@ -105,14 +105,6 @@
     border-radius: 30px;
 }
 
-.progress-fill {
-    width: 35%;
-    height: 100%;
-    background: var(--primary);
-    border-radius: 30px;
-}
-
-
 /*=============================
         SIDEBAR
 ==============================*/
@@ -191,4 +183,106 @@
 
 .download-btn:hover {
     background: #374151;
+}
+
+
+/* ===========================
+   Reader Header
+=========================== */
+
+.reader-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:30px;
+
+}
+
+.book-info{
+
+    display:flex;
+
+    gap:20px;
+
+    align-items:center;
+
+}
+
+.book-cover-small{
+
+    width:90px;
+
+    height:130px;
+
+    border-radius:12px;
+
+    object-fit:cover;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.15);
+
+}
+
+.chapter-progress{
+
+    margin-top:15px;
+
+}
+
+.progress{
+
+    width:260px;
+
+    height:8px;
+
+    background:#ddd;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    margin-top:8px;
+
+}
+
+.progress-fill{
+    width:0%;
+    height:100%;
+    background:linear-gradient(
+        90deg,
+        #6D5EF8,
+        #8B7BFF
+    );
+    transition:width .4s ease;
+}
+
+.reader-tools{
+
+    display:flex;
+
+    gap:10px;
+
+}
+
+.reader-tools button{
+
+    width:48px;
+
+    height:48px;
+
+    border:none;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    background:white;
+
+    font-size:18px;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+
 }

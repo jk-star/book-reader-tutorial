@@ -1,29 +1,24 @@
 [
-    {
-        "id": 1,
-        "slug": "finish-what-you-start",
-        "title": "Finish What You Start",
-        "author": "Peter Hollins",
-        "cover": "assets/images/finish-what-you-start.jpg",
-        "chapters": [
-            {
-                "id": 1,
-                "title": "Introduction",
-                "file": "chapters/chapter-1.html",
-                "audio": "audio/chapter-1.mp3"
-            },
-            {
-                "id": 2,
-                "title": "Know Yourself",
-                "file": "chapters/chapter-2.html",
-                "audio": "audio/chapter-2.mp3"
-            },
-            {
-                "id": 3,
-                "title": "Build Momentum",
-                "file": "chapters/chapter-3.html",
-                "audio": "audio/chapter-3.mp3"
-            }
-        ]
-    }
+  {
+    "slug": "finish-what-you-start",
+    "title": "Finish What You Start",
+    "author": "Peter Hollins",
+    "cover": "books/finish-what-you-start/images/cover.jpg",
+    "category": "Self Help",
+    "rating": 4.8,
+    "language": "English",
+    "total_chapters": 12,
+    "description": "Build discipline and finish every project."
+  },
+  {
+    "slug": "atomic-habits",
+    "title": "Atomic Habits",
+    "author": "James Clear",
+    "cover": "books/atomic-habits/images/cover.jpg",
+    "category": "Self Help",
+    "rating": 4.9,
+    "language": "English",
+    "total_chapters": 20,
+    "description": "Tiny habits create remarkable results."
+  }
 ]

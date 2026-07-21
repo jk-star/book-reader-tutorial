@@ -14,7 +14,7 @@
     background: var(--book);
     border-radius: 24px;
     padding: 50px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, .08);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
 }
 
 .chapter-top {
@@ -171,7 +171,7 @@
     background: #f3f4f6;
     cursor: pointer;
     font-size: 18px;
-    transition: .3s;
+    transition: 0.3s;
 }
 
 .player-controls button:hover {
@@ -222,7 +222,6 @@
     cursor: pointer;
 }
 
-
 .library-page {
     padding: 60px;
 }
@@ -252,7 +251,8 @@
     padding: 30px;
     border-radius: 20px;
     box-shadow: var(--shadow-sm);
-    transition: .3s;
+    transition: 0.3s;
+    text-align: center;
 }
 
 .book-card:hover {
@@ -290,4 +290,290 @@
     background: var(--primary);
     color: white;
     font-size: 15px;
+}
+
+.reader-layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    height: 100vh;
+}
+
+#sidebar {
+    background: #111827;
+    padding: 20px;
+    height: 100%;
+}
+
+#sidebar button {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    background: #374151;
+    cursor: pointer;
+}
+
+#content {
+    padding: 50px;
+    overflow: auto;
+    line-height: 2;
+}
+
+/* ===========================
+      READER LAYOUT
+=========================== */
+
+.reader-container {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    height: 100vh;
+}
+
+/* Sidebar */
+
+.sidebar {
+    background: #111827;
+    color: #fff;
+    padding: 20px;
+    overflow-y: auto;
+    height: 100%;
+}
+
+.sidebar button {
+    width: 100%;
+    text-align: left;
+    padding: 14px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 10px;
+    background: #1f2937;
+    color: #fff;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.sidebar button:hover {
+    background: #6d5ef8;
+}
+
+/* Right Side */
+
+.reader-content {
+    display: flex;
+    flex-direction: column;
+    padding: 40px;
+    background: #f5f7fb;
+}
+
+/* Book Header */
+
+.book-header {
+    margin-bottom: 30px;
+}
+
+.book-header h1 {
+    font-size: 34px;
+    margin-bottom: 8px;
+}
+
+.book-header p {
+    color: #6b7280;
+}
+
+/* Markdown Content */
+
+.chapter-content {
+    flex: 1;
+    background: #fff;
+    padding: 40px;
+    border-radius: 20px;
+    overflow: auto;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+/* Bottom Navigation */
+
+.chapter-navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 25px;
+}
+
+.chapter-navigation button {
+    padding: 14px 30px;
+    border: none;
+    border-radius: 10px;
+    background: #6d5ef8;
+    color: #fff;
+    cursor: pointer;
+}
+
+.chapter-btn{
+    width:100%;
+    padding:14px;
+    margin-bottom:12px;
+    border:none;
+    border-radius:10px;
+    background:#1F2937;
+    color:white;
+    cursor:pointer;
+    transition:.3s;
+    text-align:left;
+}
+
+.chapter-btn:hover{
+    background:#6D5EF8;
+}
+
+.chapter-btn.active{
+    background:var(--primary);
+    color:white;
+}
+
+.chapter-navigation button:disabled{
+    opacity:.4;
+    cursor:not-allowed;
+}
+
+/* ===============================
+   Markdown Typography
+================================== */
+
+.chapter-content{
+    font-size:18px;
+    line-height:1.9;
+    color:#1f2937;
+}
+
+.chapter-content h1{
+    font-size:42px;
+    font-weight:700;
+}
+
+.chapter-content h2{
+    font-size:32px;
+    margin:35px 0 18px;
+    font-weight:600;
+}
+
+.chapter-content h3{
+    font-size:26px;
+    margin:30px 0 16px;
+}
+
+.chapter-content h4{
+    font-size:22px;
+    margin:25px 0 15px;
+}
+
+.chapter-content p{
+    margin:10px 0;
+}
+
+.chapter-content strong{
+    color:#111827;
+    font-weight:700;
+}
+
+.chapter-content em{
+    color:#6D5EF8;
+}
+
+.chapter-content ul{
+    margin:20px 0;
+    padding-left:35px;
+}
+
+.chapter-content ol{
+    margin:20px 0;
+    padding-left:35px;
+}
+
+.chapter-content li{
+    margin:12px 0;
+}
+
+.chapter-content blockquote{
+    margin:30px 0;
+    padding:20px;
+    border-left:6px solid #6D5EF8;
+    background:#F4F3FF;
+    border-radius:12px;
+    color:#374151;
+    font-style:italic;
+}
+
+.chapter-content pre{
+    background:#111827;
+    color:#fff;
+    padding:25px;
+    border-radius:14px;
+    overflow:auto;
+    margin:30px 0;
+}
+
+.chapter-content code{
+    font-family:Consolas, monospace;
+    font-size:15px;
+}
+
+.chapter-content p code{
+    background:#EEEAFD;
+    color:#6D5EF8;
+    padding:3px 8px;
+    border-radius:6px;
+}
+
+.chapter-content table{
+    width:100%;
+    border-collapse:collapse;
+    margin:30px 0;
+}
+
+.chapter-content th{
+    background:#6D5EF8;
+    color:white;
+    padding:15px;
+}
+
+.chapter-content td{
+    padding:15px;
+    border:1px solid #ddd;
+}
+
+.chapter-content tr:nth-child(even){
+    background:#f8f8f8;
+}
+
+.chapter-content img{
+    width:100%;
+    border-radius:15px;
+    margin:30px 0;
+}
+
+.chapter-content hr{
+    border:none;
+    height:1px;
+    background:#ddd;
+    margin:40px 0;
+}
+
+.chapter-content a{
+    color:#6D5EF8;
+    text-decoration:none;
+}
+
+.chapter-content a:hover{
+    text-decoration:underline;
+}
+
+.empty-books{
+    text-align:center;
+    padding:60px;
+}
+
+.empty-books h2{
+    margin-bottom:10px;
 }
