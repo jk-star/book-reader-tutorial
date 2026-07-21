@@ -361,6 +361,7 @@ function toggleBookmark() {
     saveBookmarks(bookmarks);
 
     updateBookmarkIcon();
+    createSidebar();
 
 }
 
@@ -372,5 +373,17 @@ function updateBookmarkIcon() {
         bookmarks.includes(currentChapter)
             ? "⭐"
             : "🔖";
+
+}
+
+const bookmarks = getBookmarks();
+
+if (bookmarks.includes(index)) {
+
+    button.innerHTML = `⭐ ${index + 1}. ${chapter.title}`;
+
+} else {
+
+    button.textContent = `${index + 1}. ${chapter.title}`;
 
 }

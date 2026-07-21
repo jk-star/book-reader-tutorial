@@ -1,33 +1,44 @@
 const bookGrid = document.getElementById("bookGrid");
 
-fetch("books/finish-what-you-start/books.json")
-    .then(res => res.json())
+fetch("books/finish-what-you-start/book.json")
+    .then(res => {
+        if (!res.ok) {
+            throw new Error("Book not found");
+        }
+        return res.json();
+    })
+    .then(book => {
 
-    .then(books => {
-
-        books.forEach(book => {
-
-            bookGrid.innerHTML += `
-
+        bookGrid.innerHTML = `
             <article class="book-card">
 
                 <div class="book-cover">
-                    <img src="${book.cover}">
+                    <img src="books/finish-what-you-start/${book.cover}"
+                         alt="${book.title}">
                 </div>
 
                 <h2>${book.title}</h2>
 
-                <p> ${book.total_chapters} Chapters </p>
+                <p>${book.author}</p>
 
-               <button onclick="openBook('${book.slug}')">
+                <p>${book.chapters.length} Chapters</p>
+
+                <button onclick="openBook('${book.slug}')">
                     Continue Reading
                 </button>
 
             </article>
-
         `;
 
-        });
+    })
+    .catch(error => {
+
+        console.error(error);
+
+        bookGrid.innerHTML = `
+            <h2>❌ Unable to load book</h2>
+            <p>${error.message}</p>
+        `;
 
     });
 
