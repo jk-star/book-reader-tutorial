@@ -1,46 +1,97 @@
+// =========================================
+// DOM ELEMENTS
+// =========================================
+
 const bookGrid = document.getElementById("bookGrid");
 const searchInput = document.getElementById("searchInput");
-
 const categoryContainer = document.getElementById("categoryContainer");
 const sortBooks = document.getElementById("sortBooks");
 const continueReading = document.getElementById("continueReading");
+const favoriteOnly = document.getElementById("favoriteOnly");
+
+// =========================================
+// GLOBAL VARIABLES
+// =========================================
 
 let books = [];
 let currentCategory = "All";
 
+// =========================================
+// LOAD BOOKS
+// =========================================
+
 fetch("assets/data/books.json")
-    .then(res => res.json())
+    .then(res => {
+
+        if (!res.ok) {
+            throw new Error("Unable to load books.json");
+        }
+
+        return res.json();
+
+    })
     .then(data => {
 
         books = data;
-
-        //renderBooks(books);
 
         createCategories();
         filterBooks();
         renderContinueReading();
 
+    })
+    .catch(error => {
+
+        console.error(error);
+
+        bookGrid.innerHTML = `
+            <h2>Unable to load books.</h2>
+            <p>${error.message}</p>
+        `;
+
     });
+
+// =========================================
+// RENDER BOOKS
+// =========================================
 
 function renderBooks(bookList) {
 
     bookGrid.innerHTML = "";
 
     if (bookList.length === 0) {
+
         bookGrid.innerHTML = `
             <div class="empty-books">
                 <h2>📚 No Books Found</h2>
                 <p>Try another keyword.</p>
             </div>
         `;
+
         return;
     }
 
     bookList.forEach(book => {
+
+        const isFavorite = getFavorites().includes(book.slug);
+
         bookGrid.innerHTML += `
+
         <article class="book-card">
+
+            <button
+                class="favorite-btn"
+                onclick="toggleFavorite('${book.slug}')">
+
+                ${isFavorite ? "❤️" : "🤍"}
+
+            </button>
+
             <div class="book-cover">
-                <img src="${book.cover}" alt="${book.title}">
+
+                <img
+                    src="${book.cover}"
+                    alt="${book.title}">
+
             </div>
 
             <h2>${book.title}</h2>
@@ -48,7 +99,9 @@ function renderBooks(bookList) {
             <p>${book.author}</p>
 
             <p class="book-rating">
-                ⭐⭐⭐⭐⭐ ${book.rating}
+
+                ⭐ ${book.rating}
+
             </p>
 
             <p>${book.category}</p>
@@ -56,12 +109,22 @@ function renderBooks(bookList) {
             <p>${book.total_chapters} Chapters</p>
 
             <button onclick="openBook('${book.slug}')">
+
                 Continue Reading
+
             </button>
-        </article>`;
+
+        </article>
+
+        `;
+
     });
 
 }
+
+// =========================================
+// CONTINUE READING
+// =========================================
 
 function renderContinueReading() {
 
@@ -70,7 +133,8 @@ function renderContinueReading() {
 
     books.forEach(book => {
 
-        const chapter = localStorage.getItem(`book-${book.slug}`);
+        const chapter =
+            localStorage.getItem(`book-${book.slug}`);
 
         if (chapter !== null) {
 
@@ -90,14 +154,19 @@ function renderContinueReading() {
     }
 
     const progress = Math.round(
-        ((lastChapter + 1) / lastBook.total_chapters) * 100
+
+        ((lastChapter + 1) /
+        lastBook.total_chapters) * 100
+
     );
 
     continueReading.innerHTML = `
 
         <div class="continue-card">
 
-            <img src="${lastBook.cover}" alt="${lastBook.title}">
+            <img
+                src="${lastBook.cover}"
+                alt="${lastBook.title}">
 
             <div>
 
@@ -134,41 +203,9 @@ function renderContinueReading() {
 
 }
 
-
-searchInput.addEventListener("input", function () {
-
-    const keyword = this.value.toLowerCase();
-
-    const filteredBooks = books.filter(book => {
-
-        return (
-
-            book.title.toLowerCase().includes(keyword)
-
-            ||
-
-            book.author.toLowerCase().includes(keyword)
-
-            ||
-
-            book.category.toLowerCase().includes(keyword)
-
-        );
-
-    });
-
-    //renderBooks(filteredBooks);
-    searchInput.addEventListener("input", () => {
-        filterBooks();
-    });
-
-});
-
-function openBook(slug) {
-
-    window.location.href = `reader.html?book=${slug}`;
-
-}
+// =========================================
+// CATEGORY BUTTONS
+// =========================================
 
 function createCategories() {
 
@@ -188,99 +225,218 @@ function createCategories() {
 
     categories.forEach(category => {
 
-        const btn = document.createElement("button");
-        btn.className = "category-btn";
+        const button = document.createElement("button");
+
+        button.className = "category-btn";
 
         if (category === currentCategory) {
-            btn.classList.add("active");
+
+            button.classList.add("active");
+
         }
 
-        btn.textContent = category;
-        btn.onclick = () => {
+        button.textContent = category;
+
+        button.onclick = () => {
+
             currentCategory = category;
+
             filterBooks();
+
         };
 
-        categoryContainer.appendChild(btn);
+        categoryContainer.appendChild(button);
 
     });
 
 }
 
+// =========================================
+// FILTER + SEARCH + SORT
+// =========================================
+
 function filterBooks() {
 
     let filtered = [...books];
 
-    // Category Filter
+    // Category
 
     if (currentCategory !== "All") {
+
         filtered = filtered.filter(book =>
+
             book.category === currentCategory
+
         );
+
     }
 
-    // Search Filter
+    // Search
 
-    const keyword =
-        searchInput.value.toLowerCase();
+    const keyword = searchInput.value.toLowerCase();
 
     if (keyword) {
+
         filtered = filtered.filter(book =>
+
             book.title.toLowerCase().includes(keyword)
+
             ||
+
             book.author.toLowerCase().includes(keyword)
+
             ||
+
             book.category.toLowerCase().includes(keyword)
+
         );
+
+    }
+
+    // Favorites
+
+    if (favoriteOnly.checked) {
+
+        const favorites = getFavorites();
+
+        filtered = filtered.filter(book =>
+
+            favorites.includes(book.slug)
+
+        );
+
+    }
+
+    // Sorting
+
+    switch (sortBooks.value) {
+
+        case "az":
+
+            filtered.sort((a, b) =>
+
+                a.title.localeCompare(b.title)
+
+            );
+
+            break;
+
+        case "za":
+
+            filtered.sort((a, b) =>
+
+                b.title.localeCompare(a.title)
+
+            );
+
+            break;
+
+        case "author":
+
+            filtered.sort((a, b) =>
+
+                a.author.localeCompare(b.author)
+
+            );
+
+            break;
+
+        case "rating":
+
+            filtered.sort((a, b) =>
+
+                b.rating - a.rating
+
+            );
+
+            break;
+
+        case "chapters":
+
+            filtered.sort((a, b) =>
+
+                b.total_chapters - a.total_chapters
+
+            );
+
+            break;
+
     }
 
     renderBooks(filtered);
+
     createCategories();
 
 }
 
-sortBooks.addEventListener("change", filterBooks);
+// =========================================
+// FAVORITES
+// =========================================
 
-switch (sortBooks.value) {
+function getFavorites() {
 
-    case "az":
+    return JSON.parse(
 
-        filtered.sort((a, b) =>
-            a.title.localeCompare(b.title)
-        );
+        localStorage.getItem("favorites") || "[]"
 
-        break;
-
-    case "za":
-
-        filtered.sort((a, b) =>
-            b.title.localeCompare(a.title)
-        );
-
-        break;
-
-    case "author":
-
-        filtered.sort((a, b) =>
-            a.author.localeCompare(b.author)
-        );
-
-        break;
-
-    case "rating":
-
-        filtered.sort((a, b) =>
-            b.rating - a.rating
-        );
-
-        break;
-
-    case "chapters":
-
-        filtered.sort((a, b) =>
-            b.total_chapters - a.total_chapters
-        );
-
-        break;
+    );
 
 }
+
+function saveFavorites(favorites) {
+
+    localStorage.setItem(
+
+        "favorites",
+
+        JSON.stringify(favorites)
+
+    );
+
+}
+
+function toggleFavorite(slug) {
+
+    let favorites = getFavorites();
+
+    if (favorites.includes(slug)) {
+
+        favorites = favorites.filter(
+
+            item => item !== slug
+
+        );
+
+    }
+
+    else {
+
+        favorites.push(slug);
+
+    }
+
+    saveFavorites(favorites);
+
+    filterBooks();
+
+}
+
+// =========================================
+// OPEN BOOK
+// =========================================
+
+function openBook(slug) {
+
+    window.location.href = `reader.html?book=${slug}`;
+
+}
+
+// =========================================
+// EVENTS
+// =========================================
+
+searchInput.addEventListener("input", filterBooks);
+
+sortBooks.addEventListener("change", filterBooks);
+
+favoriteOnly.addEventListener("change", filterBooks);
