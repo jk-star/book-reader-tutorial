@@ -9,6 +9,11 @@ const sortBooks = document.getElementById("sortBooks");
 const continueReading = document.getElementById("continueReading");
 const favoriteOnly = document.getElementById("favoriteOnly");
 
+const totalBooks = document.getElementById("totalBooks");
+const favoriteCount = document.getElementById("favoriteCount");
+const readingCount = document.getElementById("readingCount");
+const completedCount = document.getElementById("completedCount");
+
 // =========================================
 // GLOBAL VARIABLES
 // =========================================
@@ -37,6 +42,7 @@ fetch("assets/data/books.json")
         createCategories();
         filterBooks();
         renderContinueReading();
+        updateDashboard();
 
     })
     .catch(error => {
@@ -156,7 +162,7 @@ function renderContinueReading() {
     const progress = Math.round(
 
         ((lastChapter + 1) /
-        lastBook.total_chapters) * 100
+            lastBook.total_chapters) * 100
 
     );
 
@@ -440,3 +446,37 @@ searchInput.addEventListener("input", filterBooks);
 sortBooks.addEventListener("change", filterBooks);
 
 favoriteOnly.addEventListener("change", filterBooks);
+
+
+function updateDashboard() {
+
+    totalBooks.textContent = books.length;
+
+    favoriteCount.textContent = getFavorites().length;
+
+    let reading = 0;
+    let completed = 0;
+
+    books.forEach(book => {
+
+        const chapter = localStorage.getItem(`book-${book.slug}`);
+
+        if (chapter !== null) {
+
+            reading++;
+
+            if (Number(chapter) + 1 >= book.total_chapters) {
+
+                completed++;
+
+            }
+
+        }
+
+    });
+
+    readingCount.textContent = reading;
+
+    completedCount.textContent = completed;
+
+}
