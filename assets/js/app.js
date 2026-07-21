@@ -2,6 +2,8 @@ const bookGrid = document.getElementById("bookGrid");
 const searchInput = document.getElementById("searchInput");
 
 const categoryContainer = document.getElementById("categoryContainer");
+const sortBooks = document.getElementById("sortBooks");
+const continueReading = document.getElementById("continueReading");
 
 let books = [];
 let currentCategory = "All";
@@ -16,6 +18,7 @@ fetch("assets/data/books.json")
 
         createCategories();
         filterBooks();
+        renderContinueReading();
 
     });
 
@@ -44,6 +47,10 @@ function renderBooks(bookList) {
 
             <p>${book.author}</p>
 
+            <p class="book-rating">
+                ⭐⭐⭐⭐⭐ ${book.rating}
+            </p>
+
             <p>${book.category}</p>
 
             <p>${book.total_chapters} Chapters</p>
@@ -53,6 +60,77 @@ function renderBooks(bookList) {
             </button>
         </article>`;
     });
+
+}
+
+function renderContinueReading() {
+
+    let lastBook = null;
+    let lastChapter = -1;
+
+    books.forEach(book => {
+
+        const chapter = localStorage.getItem(`book-${book.slug}`);
+
+        if (chapter !== null) {
+
+            lastBook = book;
+            lastChapter = Number(chapter);
+
+        }
+
+    });
+
+    if (!lastBook) {
+
+        continueReading.innerHTML = "";
+
+        return;
+
+    }
+
+    const progress = Math.round(
+        ((lastChapter + 1) / lastBook.total_chapters) * 100
+    );
+
+    continueReading.innerHTML = `
+
+        <div class="continue-card">
+
+            <img src="${lastBook.cover}" alt="${lastBook.title}">
+
+            <div>
+
+                <h2>Continue Reading</h2>
+
+                <h3>${lastBook.title}</h3>
+
+                <p>
+
+                    Last Read :
+                    Chapter ${lastChapter + 1}
+
+                </p>
+
+                <p>
+
+                    Progress :
+                    ${progress}%
+
+                </p>
+
+                <button
+                    onclick="openBook('${lastBook.slug}')">
+
+                    Continue Reading →
+
+                </button>
+
+            </div>
+
+        </div>
+
+    `;
 
 }
 
@@ -158,5 +236,51 @@ function filterBooks() {
 
     renderBooks(filtered);
     createCategories();
+
+}
+
+sortBooks.addEventListener("change", filterBooks);
+
+switch (sortBooks.value) {
+
+    case "az":
+
+        filtered.sort((a, b) =>
+            a.title.localeCompare(b.title)
+        );
+
+        break;
+
+    case "za":
+
+        filtered.sort((a, b) =>
+            b.title.localeCompare(a.title)
+        );
+
+        break;
+
+    case "author":
+
+        filtered.sort((a, b) =>
+            a.author.localeCompare(b.author)
+        );
+
+        break;
+
+    case "rating":
+
+        filtered.sort((a, b) =>
+            b.rating - a.rating
+        );
+
+        break;
+
+    case "chapters":
+
+        filtered.sort((a, b) =>
+            b.total_chapters - a.total_chapters
+        );
+
+        break;
 
 }

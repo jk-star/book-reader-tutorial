@@ -49,7 +49,25 @@
 
         </div>
 
-        <div id="categoryContainer" class="category-container">
+        <div class="library-toolbar">
+
+            <div id="categoryContainer" class="category-container"></div>
+
+            <select id="sortBooks" class="sort-select">
+
+                <option value="default">Default</option>
+
+                <option value="az">Title (A-Z)</option>
+
+                <option value="za">Title (Z-A)</option>
+
+                <option value="author">Author</option>
+
+                <option value="rating">Highest Rating</option>
+
+                <option value="chapters">Most Chapters</option>
+
+            </select>
 
         </div>
 
@@ -97,71 +115,13 @@
 
             </header>
 
-            <section class="book-grid" id="bookGrid">
-
-                <!-- Book Card -->
-
-                <!-- <article class="book-card">
-
-                    <div class="book-cover">
-
-                        📘
-
-                    </div>
-
-                    <h2>HTML</h2>
-
-                    <p>40 Chapters</p>
-
-                    <button>
-
-                        Continue Reading
-
-                    </button>
-
-                </article>
-
-                <article class="book-card">
-
-                    <div class="book-cover">
-
-                        🎨
-
-                    </div>
-
-                    <h2>CSS</h2>
-
-                    <p>35 Chapters</p>
-
-                    <button>
-
-                        Continue Reading
-
-                    </button>
-
-                </article>
-
-                <article class="book-card">
-
-                    <div class="book-cover">
-
-                        ⚡
-
-                    </div>
-
-                    <h2>JavaScript</h2>
-
-                    <p>60 Chapters</p>
-
-                    <button>
-
-                        Continue Reading
-
-                    </button>
-
-                </article> -->
+            <section id="continueReading" class="continue-reading">
 
             </section>
+
+            <div id="bookGrid" class="book-grid">
+
+            </div>
 
         </div>
     </main>

@@ -577,3 +577,39 @@
 .empty-books h2{
     margin-bottom:10px;
 }
+
+.book-rating {
+    color: #ff9800;
+    font-size: 15px;
+    font-weight: 600;
+    margin: 10px 0;
+}
+
+/* Continue Reading */
+
+.continue-reading{
+    margin:30px 0;
+}
+
+.continue-card{
+    display:flex;
+    align-items:center;
+    gap:20px;
+    background:#fff;
+    padding:20px;
+    border-radius:16px;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+.continue-card img{
+    width:90px;
+    border-radius:10px;
+}
+
+.continue-card h2{
+    margin-bottom:8px;
+}
+
+.continue-card button{
+    margin-top:15px;
+}
