@@ -1,23 +1,24 @@
 [
-    {
-        "slug": "finish-what-you-start",
-        "title": "Finish What You Start",
-        "author": "Peter Hollins",
-        "cover": "books/finish-what-you-start/images/cover.jpg",
-        "total_chapters": 12
-    },
-    {
-        "slug": "atomic-habits",
-        "title": "Atomic Habits",
-        "author": "James Clear",
-        "cover": "books/atomic-habits/images/cover.jpg",
-        "total_chapters": 20
-    },
-    {
-        "slug": "deep-work",
-        "title": "Deep Work",
-        "author": "Cal Newport",
-        "cover": "books/deep-work/images/cover.jpg",
-        "total_chapters": 15
-    }
+  {
+    "slug": "finish-what-you-start",
+    "title": "Finish What You Start",
+    "author": "Peter Hollins",
+    "cover": "books/finish-what-you-start/images/cover.jpg",
+    "category": "Self Help",
+    "rating": 4.8,
+    "language": "English",
+    "total_chapters": 12,
+    "description": "Build discipline and finish every project."
+  },
+  {
+    "slug": "atomic-habits",
+    "title": "Atomic Habits",
+    "author": "James Clear",
+    "cover": "books/atomic-habits/images/cover.jpg",
+    "category": "Self Help",
+    "rating": 4.9,
+    "language": "English",
+    "total_chapters": 20,
+    "description": "Tiny habits create remarkable results."
+  }
 ]

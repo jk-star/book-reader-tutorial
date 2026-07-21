@@ -569,3 +569,11 @@
     text-decoration:underline;
 }
 
+.empty-books{
+    text-align:center;
+    padding:60px;
+}
+
+.empty-books h2{
+    margin-bottom:10px;
+}
