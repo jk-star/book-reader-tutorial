@@ -49,9 +49,39 @@
 
         </div>
 
+        <div class="library-toolbar">
+
+            <div id="categoryContainer" class="category-container"></div>
+
+            <select id="sortBooks" class="sort-select">
+
+                <option value="default">Default</option>
+
+                <option value="az">Title (A-Z)</option>
+
+                <option value="za">Title (Z-A)</option>
+
+                <option value="author">Author</option>
+
+                <option value="rating">Highest Rating</option>
+
+                <option value="chapters">Most Chapters</option>
+
+            </select>
+
+        </div>
+
+        <label class="favorite-filter">
+
+            <input type="checkbox" id="favoriteOnly">
+
+            Favorites Only
+
+        </label>
+
         <!-- Right Side -->
 
-        <div class="header-actions">
+        <!-- <div class="header-actions">
 
             <button class="font-btn">
                 Aa
@@ -77,7 +107,7 @@
 
             </div>
 
-        </div>
+        </div> -->
 
     </header>
 
@@ -93,71 +123,49 @@
 
             </header>
 
-            <section class="book-grid" id="bookGrid">
+            <section class="dashboard">
 
-                <!-- Book Card -->
+                <div class="dashboard-card">
 
-                <!-- <article class="book-card">
+                    <h3>Total Books</h3>
 
-                    <div class="book-cover">
+                    <h1 id="totalBooks">0</h1>
 
-                        📘
+                </div>
 
-                    </div>
+                <div class="dashboard-card">
 
-                    <h2>HTML</h2>
+                    <h3>Favorites</h3>
 
-                    <p>40 Chapters</p>
+                    <h1 id="favoriteCount">0</h1>
 
-                    <button>
+                </div>
 
-                        Continue Reading
+                <div class="dashboard-card">
 
-                    </button>
+                    <h3>Reading</h3>
 
-                </article>
+                    <h1 id="readingCount">0</h1>
 
-                <article class="book-card">
+                </div>
 
-                    <div class="book-cover">
+                <div class="dashboard-card">
 
-                        🎨
+                    <h3>Completed</h3>
 
-                    </div>
+                    <h1 id="completedCount">0</h1>
 
-                    <h2>CSS</h2>
-
-                    <p>35 Chapters</p>
-
-                    <button>
-
-                        Continue Reading
-
-                    </button>
-
-                </article>
-
-                <article class="book-card">
-
-                    <div class="book-cover">
-
-                        ⚡
-
-                    </div>
-
-                    <h2>JavaScript</h2>
-
-                    <p>60 Chapters</p>
-
-                    <button>
-
-                        Continue Reading
-
-                    </button>
-
-                </article> -->
+                </div>
 
             </section>
+
+            <section id="continueReading" class="continue-reading">
+
+            </section>
+
+            <div id="bookGrid" class="book-grid">
+
+            </div>
 
         </div>
     </main>
