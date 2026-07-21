@@ -30,6 +30,11 @@ const darkBtn = document.querySelector(
 );
 
 const bookmarkBtn = document.getElementById("bookmarkBtn");
+
+const chapterSearch = document.getElementById("chapterSearch");
+let readingSeconds = 0;
+let timer = null;
+
 // =========================================
 // INIT
 // =========================================
@@ -151,7 +156,11 @@ async function openChapter(index) {
 
         const markdown = await response.text();
 
+        // Render Markdown
         content.innerHTML = marked.parse(markdown);
+
+        // Start Reading Timer
+        startReadingTimer();
 
         // Save Last Read Chapter
         localStorage.setItem(
@@ -159,23 +168,22 @@ async function openChapter(index) {
             currentChapter
         );
 
-        // Update UI
-        updateActiveChapter();
-        updateNavigation();
-        updateProgress();
-        updateBookmarkIcon();
-
+        // Update Chapter Counter
         chapterCount.textContent =
             `Chapter ${currentChapter + 1} / ${currentBook.chapters.length}`;
 
+        // Update Progress Bar
         const progress =
             ((currentChapter + 1) / currentBook.chapters.length) * 100;
 
         progressBar.style.width = progress + "%";
 
+        // Update UI
         updateActiveChapter();
-
         updateNavigation();
+        updateProgress();
+        updateBookmarkIcon();
+        updateAnalytics();
 
     }
 
@@ -184,8 +192,13 @@ async function openChapter(index) {
         console.error(error);
 
         content.innerHTML = `
-            <h2>❌ Chapter Not Found</h2>
-            <p>${chapter.file}</p>
+            <div class="error-box">
+
+                <h2>❌ Chapter Not Found</h2>
+
+                <p>${chapter.file}</p>
+
+            </div>
         `;
 
     }
@@ -387,3 +400,83 @@ if (bookmarks.includes(index)) {
     button.textContent = `${index + 1}. ${chapter.title}`;
 
 }
+
+function updateAnalytics() {
+
+    const readingTime =
+        document.getElementById("readingTime");
+
+    const wordCount =
+        document.getElementById("wordCount");
+
+    const readingProgress =
+        document.getElementById("readingProgress");
+
+    if (!readingTime || !wordCount || !readingProgress) {
+        return;
+    }
+
+    const words =
+        content.innerText
+            .trim()
+            .split(/\s+/)
+            .length;
+
+    wordCount.textContent = words;
+
+    readingTime.textContent =
+        Math.floor(readingSeconds / 60) + " min";
+
+    readingProgress.textContent =
+        Math.round(
+            ((currentChapter + 1) /
+            currentBook.chapters.length) * 100
+        ) + "%";
+
+}
+
+
+chapterSearch.addEventListener("input", function(){
+
+    const keyword = this.value.trim().toLowerCase();
+
+    const paragraphs =
+        content.querySelectorAll("p,li");
+
+    paragraphs.forEach(item=>{
+
+        item.style.background="";
+
+        if(keyword==="") return;
+
+        if(item.textContent
+            .toLowerCase()
+            .includes(keyword)){
+
+            item.style.background="#FFF3BF";
+
+        }
+
+    });
+
+});
+
+function startReadingTimer(){
+
+    if(timer) clearInterval(timer);
+
+    timer = setInterval(()=>{
+
+        readingSeconds++;
+
+        localStorage.setItem(
+            `reading-time-${slug}`,
+            readingSeconds
+        );
+
+        updateAnalytics();
+
+    },1000);
+
+}
+
