@@ -711,3 +711,7 @@
     border-radius:8px;
     cursor:pointer;
 }
+
+.search-wrap{
+    display: flex;
+}
