@@ -733,3 +733,19 @@ mark{
     color:#fff;
     cursor:pointer;
 }
+
+.highlights-section{
+    margin-top:30px;
+    background:#fff;
+    padding:20px;
+    border-radius:12px;
+}
+
+.highlights-section ul{
+    padding-left:20px;
+}
+
+.highlights-section li{
+    margin:10px 0;
+    cursor:pointer;
+}

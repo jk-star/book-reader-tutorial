@@ -187,6 +187,7 @@ async function openChapter(index) {
         updateProgress();
         updateBookmarkIcon();
         updateAnalytics();
+        renderHighlights();
 
         // Load Saved Notes
         chapterNotes.value =
@@ -491,3 +492,64 @@ highlightBtn.addEventListener("click", () => {
     window.getSelection().removeAllRanges();
     highlightBtn.style.display = "none";
 });
+
+const highlightsList = document.getElementById("highlightsList");
+
+let highlights =
+    JSON.parse(
+
+        localStorage.getItem(
+            `highlights-${slug}-${currentChapter}`
+        )
+
+    ) || [];
+
+highlights.push(
+
+    mark.textContent
+
+);
+
+localStorage.setItem(
+
+    `highlights-${slug}-${currentChapter}`,
+
+    JSON.stringify(highlights)
+
+);
+
+renderHighlights();
+
+function renderHighlights(){
+
+    highlightsList.innerHTML = "";
+
+    const highlights =
+        JSON.parse(
+
+            localStorage.getItem(
+
+                `highlights-${slug}-${currentChapter}`
+
+            )
+
+        ) || [];
+
+    highlights.forEach(text=>{
+
+        const li =
+            document.createElement("li");
+
+        li.textContent = text;
+
+        highlightsList.appendChild(li);
+
+    });
+
+}
+
+
+content.innerHTML =
+    marked.parse(markdown);
+
+restoreHighlights();
