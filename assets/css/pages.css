@@ -715,3 +715,37 @@
 .search-wrap{
     display: flex;
 }
+
+mark{
+    background:#fff59d;
+    padding:2px 4px;
+    border-radius:4px;
+}
+
+.highlight-btn{
+    position:fixed;
+    display:none;
+    z-index:999;
+    padding:8px 16px;
+    border:none;
+    border-radius:8px;
+    background:#6C63FF;
+    color:#fff;
+    cursor:pointer;
+}
+
+.highlights-section{
+    margin-top:30px;
+    background:#fff;
+    padding:20px;
+    border-radius:12px;
+}
+
+.highlights-section ul{
+    padding-left:20px;
+}
+
+.highlights-section li{
+    margin:10px 0;
+    cursor:pointer;
+}

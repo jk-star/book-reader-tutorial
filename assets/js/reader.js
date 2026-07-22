@@ -187,6 +187,7 @@ async function openChapter(index) {
         updateProgress();
         updateBookmarkIcon();
         updateAnalytics();
+        renderHighlights();
 
         // Load Saved Notes
         chapterNotes.value =
@@ -462,3 +463,93 @@ saveNotes.addEventListener("click", () => {
 });
 
 chapterNotes.value = localStorage.getItem(`notes-${slug}-${currentChapter}`) || "";
+
+const highlightBtn = document.getElementById("highlightBtn");
+let selectedRange = null;
+
+document.addEventListener("mouseup", () => {
+
+    const selection = window.getSelection();
+
+    if(selection.toString().trim() === ""){
+        highlightBtn.style.display = "none";
+        return;
+    }
+
+    selectedRange = selection.getRangeAt(0);
+    const rect = selectedRange.getBoundingClientRect();
+
+    highlightBtn.style.left = rect.left + "px";
+    highlightBtn.style.top =  rect.top - 45 + "px";
+    highlightBtn.style.display = "block";
+
+});
+
+highlightBtn.addEventListener("click", () => {
+    if(!selectedRange) return;
+    const mark = document.createElement("mark");
+    selectedRange.surroundContents(mark);
+    window.getSelection().removeAllRanges();
+    highlightBtn.style.display = "none";
+});
+
+const highlightsList = document.getElementById("highlightsList");
+
+let highlights =
+    JSON.parse(
+
+        localStorage.getItem(
+            `highlights-${slug}-${currentChapter}`
+        )
+
+    ) || [];
+
+highlights.push(
+
+    mark.textContent
+
+);
+
+localStorage.setItem(
+
+    `highlights-${slug}-${currentChapter}`,
+
+    JSON.stringify(highlights)
+
+);
+
+renderHighlights();
+
+function renderHighlights(){
+
+    highlightsList.innerHTML = "";
+
+    const highlights =
+        JSON.parse(
+
+            localStorage.getItem(
+
+                `highlights-${slug}-${currentChapter}`
+
+            )
+
+        ) || [];
+
+    highlights.forEach(text=>{
+
+        const li =
+            document.createElement("li");
+
+        li.textContent = text;
+
+        highlightsList.appendChild(li);
+
+    });
+
+}
+
+
+content.innerHTML =
+    marked.parse(markdown);
+
+restoreHighlights();
