@@ -462,3 +462,32 @@ saveNotes.addEventListener("click", () => {
 });
 
 chapterNotes.value = localStorage.getItem(`notes-${slug}-${currentChapter}`) || "";
+
+const highlightBtn = document.getElementById("highlightBtn");
+let selectedRange = null;
+
+document.addEventListener("mouseup", () => {
+
+    const selection = window.getSelection();
+
+    if(selection.toString().trim() === ""){
+        highlightBtn.style.display = "none";
+        return;
+    }
+
+    selectedRange = selection.getRangeAt(0);
+    const rect = selectedRange.getBoundingClientRect();
+
+    highlightBtn.style.left = rect.left + "px";
+    highlightBtn.style.top =  rect.top - 45 + "px";
+    highlightBtn.style.display = "block";
+
+});
+
+highlightBtn.addEventListener("click", () => {
+    if(!selectedRange) return;
+    const mark = document.createElement("mark");
+    selectedRange.surroundContents(mark);
+    window.getSelection().removeAllRanges();
+    highlightBtn.style.display = "none";
+});

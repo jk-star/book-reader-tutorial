@@ -715,3 +715,21 @@
 .search-wrap{
     display: flex;
 }
+
+mark{
+    background:#fff59d;
+    padding:2px 4px;
+    border-radius:4px;
+}
+
+.highlight-btn{
+    position:fixed;
+    display:none;
+    z-index:999;
+    padding:8px 16px;
+    border:none;
+    border-radius:8px;
+    background:#6C63FF;
+    color:#fff;
+    cursor:pointer;
+}
